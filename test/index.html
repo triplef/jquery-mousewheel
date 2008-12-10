@@ -78,81 +78,109 @@
 				
 				
 				$('#test1')
-					.mousewheel(function(event, delta) {
-						if (delta > 0)
-							$('#logger').append('#test1: up ('+delta+')<br />');
-						else if (delta < 0)
-							$('#logger').append('#test1: down ('+delta+')<br />');
+					.mousewheel(function(event, deltaY, deltaX) {
+						if (deltaY > 0)
+							$('#logger').append('#test1: up ('+deltaY+')<br />');
+						else if (deltaY < 0)
+							$('#logger').append('#test1: down ('+deltaY+')<br />');
+					  if (deltaX > 0)
+							$('#logger').append('#test1: left ('+deltaX+')<br />');
+						else if (deltaX < 0)
+							$('#logger').append('#test1: right ('+deltaX+')<br />');
 						
 						$('#logger').append('pageX: ' + event.pageX + ' pageY: ' + event.pageY );
 					});
 				
 				$('#test2')
-					.mousewheel(function(event, delta) {
-						if (delta > 0)
-							$('#logger').append('#test2: up ('+delta+')<br />');
-						else if (delta < 0)
-							$('#logger').append('#test2: down ('+delta+')<br />');
+					.mousewheel(function(event, deltaY, deltaX) {
+						if (deltaY > 0)
+							$('#logger').append('#test2: up ('+deltaY+')<br />');
+						else if (deltaY < 0)
+							$('#logger').append('#test2: down ('+deltaY+')<br />');
+					  if (deltaX > 0)
+							$('#logger').append('#test2: left ('+deltaX+')<br />');
+						else if (deltaX < 0)
+							$('#logger').append('#test2: right ('+deltaX+')<br />');
 						return false; // prevent default
 					});
 				
 				$('#test3')
 					.hover(function() { $('#logger').append('#test3: mouseover'); }, function() { $('#logger').append('#test3: mouseout'); })
-					.mousewheel(function(event, delta) {
+					.mousewheel(function(event, deltaY) {
 						$('#logger').append('#test3: I should not have been logged');
 					})
 					.unmousewheel();
 				
-				var testRemoval = function(event, delta) {
+				var testRemoval = function(event, deltaY) {
 					$('#logger').append('#test4: I should not have been logged');
 				};
 				
 				$('#test4')
-					.mousewheel(function(event, delta) {
-						if (delta > 0)
-							$('#logger').append('#test4: up ('+delta+')<br />');
-						else if (delta < 0)
-							$('#logger').append('#test4: down ('+delta+')<br />');
+					.mousewheel(function(event, deltaY, deltaX) {
+						if (deltaY > 0)
+							$('#logger').append('#test4: up ('+deltaY+')<br />');
+						else if (deltaY < 0)
+							$('#logger').append('#test4: down ('+deltaY+')<br />');
+					  if (deltaX > 0)
+							$('#logger').append('#test4: left ('+deltaX+')<br />');
+						else if (deltaX < 0)
+							$('#logger').append('#test4: right ('+deltaX+')<br />');
 						return false;
 					})
 					.mousewheel(testRemoval)
-					.mousewheel(function(event, delta) {
-						if (delta > 0)
-							$('#logger').append('#test4: up ('+delta+') from 2nd handler');
-						else if (delta < 0)
-							$('#logger').append('#test4: down ('+delta+') from 2nd handler');
+					.mousewheel(function(event, deltaY, deltaX) {
+						if (deltaY > 0)
+							$('#logger').append('#test4: up ('+deltaY+') from 2nd handler');
+						else if (deltaY < 0)
+							$('#logger').append('#test4: down ('+deltaY+') from 2nd handler');
+					  if (deltaX > 0)
+							$('#logger').append('#test4: left ('+deltaX+')<br />');
+						else if (deltaX < 0)
+							$('#logger').append('#test4: right ('+deltaX+')<br />');
 						return false;
 					})
 					.unmousewheel(testRemoval);
 				
 				$('#test5')
-					.mousewheel(function(event, delta) {
-						if (delta > 0)
-							$('#logger').append('#test5: up ('+delta+')<br />');
-						else if (delta < 0)
-							$('#logger').append('#test5: down ('+delta+')<br />');
+					.mousewheel(function(event, deltaY, deltaX) {
+						if (deltaY > 0)
+							$('#logger').append('#test5: up ('+deltaY+')<br />');
+						else if (deltaY < 0)
+							$('#logger').append('#test5: down ('+deltaY+')<br />');
+					  if (deltaX > 0)
+							$('#logger').append('#test5: left ('+deltaX+')<br />');
+						else if (deltaX < 0)
+							$('#logger').append('#test5: right ('+deltaX+')<br />');
 						
 						event.stopPropagation();
 						event.preventDefault();
 					});
 				
 				$('#test6')
-					.mousewheel(function(event, delta) {
-						if (delta > 0)
-							$('#logger').append('#test6: up ('+delta+')<br />');
-						else if (delta < 0)
-							$('#logger').append('#test6: down ('+delta+')<br />');
+					.mousewheel(function(event, deltaY, deltaX) {
+						if (deltaY > 0)
+							$('#logger').append('#test6: up ('+deltaY+')<br />');
+						else if (deltaY < 0)
+							$('#logger').append('#test6: down ('+deltaY+')<br />');
+					  if (deltaX > 0)
+							$('#logger').append('#test6: left ('+deltaX+')<br />');
+						else if (deltaX < 0)
+							$('#logger').append('#test6: right ('+deltaX+')<br />');
 						
 						event.stopPropagation();
 						event.preventDefault();
 					});
 
 				$('#test7')
-					.mousewheel(function(event, delta) {
-						if (delta > 0)
-							$('#logger').append('#test7: up ('+delta+')<br />');
-						else if (delta < 0)
-							$('#logger').append('#test7 down ('+delta+')<br />');
+					.mousewheel(function(event, deltaY, deltaX) {
+						if (deltaY > 0)
+							$('#logger').append('#test7: up ('+deltaY+')<br />');
+						else if (deltaY < 0)
+							$('#logger').append('#test7 down ('+deltaY+')<br />');
+					  if (deltaX > 0)
+							$('#logger').append('#test7: left ('+deltaX+')<br />');
+						else if (deltaX < 0)
+							$('#logger').append('#test7: right ('+deltaX+')<br />');
 						
 						event.preventDefault();
 					});

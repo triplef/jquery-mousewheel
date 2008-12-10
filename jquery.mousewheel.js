@@ -48,20 +48,32 @@ $.event.special.mousewheel = {
 	handler: function(event) {
 		var args = Array.prototype.slice.call( arguments, 1 );
 		
-		event = $.event.fix(event || window.event);
+		// $.event.fix currently doesn't add some non-standard attributes
+		var origEvent = event || window.event;
+		event = $.event.fix(origEvent);
+		
 		// Get correct pageX, pageY, clientX and clientY for mozilla
 		$.extend( event, $.data(this, 'mwcursorposdata') || {} );
-		var delta = 0, returnValue = true;
+		var deltaY = 0, deltaX = 0, returnValue = true;
 		
-		if ( event.wheelDelta ) delta = event.wheelDelta/120;
-		if ( event.detail     ) delta = -event.detail/3;
-		if ( $.browser.opera  ) delta = -event.wheelDelta;
+		if ( event.wheelDelta ) deltaY = event.wheelDelta/120;
+		if ( event.detail     ) deltaY = -event.detail/3;
+		if ( $.browser.opera  ) deltaY = -event.wheelDelta;
+		
+		// Try to get horizontal delta
+		if ( origEvent.HORIZONTAL_AXIS != undefined && origEvent.axis == origEvent.HORIZONTAL_AXIS ) {
+			deltaX = deltaY;
+			deltaY = 0;
+		}
+		if ( origEvent.wheelDeltaY != undefined ) deltaY = origEvent.wheelDeltaY/120;
+		if ( origEvent.wheelDeltaX != undefined ) deltaX = origEvent.wheelDeltaX/120;
 		
 		event.data  = event.data || {};
 		event.type  = "mousewheel";
 		
-		// Add delta to the front of the arguments
-		args.unshift(delta);
+		// Add deltas to the front of the arguments
+		args.unshift(deltaX);
+		args.unshift(deltaY);
 		// Add event to the front of the arguments
 		args.unshift(event);
 
